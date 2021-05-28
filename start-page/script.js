@@ -38,7 +38,7 @@ const ClassroomLinks = {
 
 const Utils = {
 	goToLink(link) {
-		window.location.replace(link);
+		window.location.href = `${link}`;
 	}
 }
 
