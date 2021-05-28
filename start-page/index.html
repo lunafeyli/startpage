@@ -11,65 +11,75 @@
 	</head>
 	<body>
 		<main>
+			<ul class="side-links">
+			</ul>
 			<div class="search-bar">
 				<input type="text" name="search-bar" id="bar" autocomplete="off" autofocus="on">
 			</div>
 			<ul class="classroom-links">
-				<li class="classroom-link portugues">
+				<li class="classroom-link" id="portugues">
 
 					<span class="title">Portugues</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link matematica">
+				<li class="classroom-link" id="matematica">
 
 					<span class="title">Matematica</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link ciencias">
+				<li class="classroom-link" id="ciencias">
 
 					<span class="title">Ciencias</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link geografia">
+				<li class="classroom-link" id="geografia">
 
 					<span class="title">Geografia</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link historia">
+				<li class="classroom-link" id="historia">
 
 					<span class="title">Historia</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link artes">
+				<li class="classroom-link" id="artes">
 
 					<span class="title">Artes</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link edFisica">
+				<li class="classroom-link" id="edFisica">
 
 					<span class="title">Ed. Fisica</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link ingles">
+				<li class="classroom-link" id="ingles">
 
 					<span class="title">Ingles</span>
 					<span class="icon"></span>
 
 				</li>
-				<li class="classroom-link espanhol">
+				<li class="classroom-link" id="espanhol">
 
 					<span class="title">Espanhol</span>
 					<span class="icon"></span>
 
 				</li>
 			</ul>
+			<div class="new-link-area">
+				<button class="add-link-button" onclick="SideBarLinks.onAddArea()">
+				</button>
+				<div class="add-link">
+					<input type="text" name="" class="add-link-input" id="name" placeholder="Nome">
+					<input type="text" name="" class="add-link-input" id="url" value="http://" placeholder="Link">
+				</div>
+			</div>
 		</main>
 
 		<script src="script.js"></script>
