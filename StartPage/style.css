@@ -1,0 +1,84 @@
+
+/**/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+    font-weight: 300;
+}
+
+html {
+    width: 100%;
+}
+
+body {
+    overflow: hidden;
+    background-color: #151019;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body,
+html {
+    /* height: 450px;
+    width: 280px; */
+	height: 100vh;
+    width: 100vw;
+}
+
+#bar {
+    height: 70%;
+    width: 70vw;
+    outline: none;
+    border: none;
+    font-size: 10rem;
+    text-align: center;
+    background-color: transparent;
+    color: #fff;
+}
+
+.classroom-links {
+    /*display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;*/
+    position: absolute;
+    right: 25px;
+}
+
+.classroom-links li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.classroom-links li .title{
+    color: #ffffff78;
+    padding-right: 10px;
+    font-weight: lighter;
+    font-family: system-ui;
+    letter-spacing: 2px;
+}
+
+.classroom-links li .icon{
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    background-color: #151019ff;
+    background-image: url(./book.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.classroom-links li:hover .icon {
+    background-image: url(./book-open.svg);
+}
