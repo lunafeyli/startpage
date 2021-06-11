@@ -12,64 +12,70 @@
 	<body>
 		<main>
 			<ul class="side-links">
+				<li>
+					<span class="icon"></span>
+					<a class="link" href="www.google.com">
+						<span class="title">Portugues</span>
+					</a>
+				</li>
 			</ul>
 			<div class="search-bar">
 				<input type="text" name="search-bar" id="bar" autocomplete="off" autofocus="on">
 			</div>
 			<ul class="classroom-links">
-				<li class="classroom-link" id="portugues">
-
-					<span class="title">Portugues</span>
+				<li class="classroom-link">
+					<a id="portugues">
+						<span class="title">Portugues</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="matematica">
-
-					<span class="title">Matematica</span>
+				<li class="classroom-link">
+					<a id="matematica">
+						<span class="title">Matematica</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="ciencias">
-
-					<span class="title">Ciencias</span>
+				<li class="classroom-link">
+					<a id="ciencias">
+						<span class="title">Ciencias</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="geografia">
-
-					<span class="title">Geografia</span>
+				<li class="classroom-link">
+					<a id="geografia">
+						<span class="title">Geografia</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="historia">
-
-					<span class="title">Historia</span>
+				<li class="classroom-link">
+					<a id="historia">
+						<span class="title">Historia</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="artes">
-
-					<span class="title">Artes</span>
+				<li class="classroom-link">
+					<a id="artes">
+						<span class="title">Artes</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="edFisica">
-
-					<span class="title">Ed. Fisica</span>
+				<li class="classroom-link">
+					<a id="edFisica">
+						<span class="title">Ed. Fisica</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="ingles">
-
-					<span class="title">Ingles</span>
+				<li class="classroom-link">
+					<a id="ingles">
+						<span class="title">Ingles</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
-				<li class="classroom-link" id="espanhol">
-
-					<span class="title">Espanhol</span>
+				<li class="classroom-link">
+					<a id="espanhol">
+						<span class="title">Espanhol</span>
+					</a>
 					<span class="icon"></span>
-
 				</li>
 			</ul>
 			<div class="new-link-area">
@@ -78,9 +84,16 @@
 				<div class="add-link">
 					<input type="text" name="" class="add-link-input" id="name" placeholder="Nome">
 					<input type="text" name="" class="add-link-input" id="url" value="http://" placeholder="Link">
+					<button class="add-link-input" onclick="SideBarLinks.addLink()">Adicionar</button>
 				</div>
 			</div>
+			<button class="open-modal-button" onclick="Modal.toggle()" disabled="true"></button>
 		</main>
+		<div class="modal-overlay">
+			<div class="modal">
+				<input type="text" name="" id="color-input" value="#">
+			</div>
+		</div>
 
 		<script src="script.js"></script>
 	    <script>

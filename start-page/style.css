@@ -61,6 +61,10 @@ html {
     margin: 10px 0;
 }
 
+.classroom-links li a {
+    text-decoration: none;
+}
+
 .classroom-links li .title{
     color: #ffffff78;
     padding-right: 10px;
@@ -100,6 +104,10 @@ html {
     margin: 10px 0;
 }
 
+.side-links li a {
+    text-decoration: none;
+}
+
 .side-links li .title{
     color: #ffffff78;
     padding-left: 10px;
@@ -109,7 +117,8 @@ html {
 }
 
 .side-links li .icon,
-.add-link-button {
+.add-link-button,
+.open-modal-button {
     height: 38px;
     width: 38px;
     border-radius: 50%;
@@ -117,6 +126,7 @@ html {
     background-image: url(./book.svg);
     background-repeat: no-repeat;
     background-position: center;
+    cursor: pointer;
 }
 
 .side-links li:hover .icon {
@@ -136,7 +146,8 @@ html {
     flex-direction: column;
 }
 
-.add-link input {
+.add-link input,
+.add-link button {
     background-color: transparent;
     border-radius: 50px;
     border: 2px solid #ffffff3b;
@@ -147,9 +158,74 @@ html {
     margin: 5px 0;
 }
 
+.add-link button:hover {
+    background-color: #ffffff11;
+    color: #fff;
+}
+
+.add-link button:active {
+    background-color: #ffffff3b;
+    color: #fff;
+}
+
 .add-link-button {
     outline: none;
     position: absolute;
     left: 25px;
     bottom: 25px;
+}
+
+.open-modal-button {
+    outline: none;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+}
+
+.modal-overlay,
+.modal {
+    display: none;
+}
+
+.modal-overlay.on {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.on {
+    background-color: #110d15;
+    padding: 25px;
+    display: block;
+    z-index: 1000;
+}
+
+.open-modal-button {
+    z-index: 1001;
+}
+
+.delete-button {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff00;
+    border: none;
+    outline: none;
+    color: white;
+    display: none;
+    cursor: pointer;
+}
+
+.link:hover .delete-button {
+    display: flex;
 }

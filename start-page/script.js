@@ -1,4 +1,13 @@
-const url = "duckduckgo.com/?q=&t=h_&ia=web"
+
+const Modal = {
+	toggle() {
+		let modalOverlay = document.querySelector(".modal-overlay")
+		let modal = document.querySelector(".modal")
+
+		modalOverlay.classList.toggle("on")
+		modal.classList.toggle("on")
+	}
+}
 
 const Storage = {
 	get() {
@@ -10,6 +19,7 @@ const Storage = {
 }
 
 const SearchBar = {
+	url: "duckduckgo.com/?q=&t=h_&ia=web",
 	searchBar: document.querySelector("#bar"),
 
 	search() {
@@ -19,7 +29,7 @@ const SearchBar = {
 }
 
 const ClassroomLinks = {
-	linkButtons: document.querySelectorAll(".classroom-link"),
+	linkButtons: document.querySelectorAll(".classroom-link a"),
 
 	urls: {
 		portugues:"https://classroom.google.com/u/1/c/MjY0ODY1MjAzMTAw",
@@ -34,14 +44,15 @@ const ClassroomLinks = {
 	},
 
 	prepareListener() {
-		ClassroomLinks.linkButtons.forEach( e => {
+		/*ClassroomLinks.linkButtons.forEach( e => {
 			e.addEventListener("click", element => {
 				let clicked = element.path[1]
 				let materia = clicked.id
 				let url = ClassroomLinks.urls[materia]
 				Utils.goToLink(url)
 			} )
-		} )
+		} )*/
+		ClassroomLinks.linkButtons.forEach( e => { e.href = ClassroomLinks.urls[e.id] } )
 	}
 }
 
@@ -63,11 +74,26 @@ const SideBarLinks = {
 
 		App.reload()
 	},
-	removeLink() {},
+	removeLink(name) {
+		let toRemove = SideBarLinks.all.filter( element => element.name == name )[0]
+		toRemove = SideBarLinks.all.indexOf(toRemove)
+
+		SideBarLinks.all.splice(toRemove,1)
+
+		App.reload()
+	},
 	onAddArea() {
 		document.querySelector(".add-link").classList.toggle('on')
 		SideBarLinks.addLinkInputName.value = ""
 		SideBarLinks.addLinkInputUrl.value = "http://"
+	}
+}
+
+const Configs = {
+	colorInput: document.querySelector('#color-input'),
+
+	changeBackgroundColor() {
+		document.body.style.backgroundColor = Configs.colorInput.value
 	}
 }
 
@@ -83,8 +109,11 @@ const DOM = {
 	},
 	innerHtmlLink(element) {
 		let html = `
+		<button class="delete-button" onclick="SideBarLinks.removeLink(${name})">X</button>
 		<span class="icon"></span>
-		<span class="title">${element.name}</span>
+		<a class="link" href="${element.url}">
+			<span class="title">${element.name}</span>
+		</a>
 		`
 
 		return html
@@ -96,7 +125,7 @@ const DOM = {
 
 const Utils = {
 	goToLink(link) {
-		window.location.href = `${link}`;
+		window.location.href = link;
 	}
 }
 
@@ -109,16 +138,11 @@ const App = {
 				SearchBar.search()
 			}
 		} )
-		SideBarLinks.addLinkInputName.addEventListener( "keydown", element => {
-			if (element.key == "Enter" && SideBarLinks.addLinkInputName.value != "" && SideBarLinks.addLinkInputUrl.value != "http://") {
-				SideBarLinks.addLink()
-				document.querySelector(".add-link").classList.remove('on')
-			}
-		} )
-		SideBarLinks.addLinkInputUrl.addEventListener( "keydown", element => {
-			if (element.key == "Enter" && SideBarLinks.addLinkInputName.value != "" && SideBarLinks.addLinkInputUrl.value != "http://") {
-				SideBarLinks.addLink()
-				document.querySelector(".add-link").classList.remove('on')
+		Configs.colorInput.addEventListener( "keydown", element => {
+			if (element.key == "Enter" && Configs.colorInput.value != "" && Configs.colorInput.value.includes('#')) {
+				Modal.toggle()
+				Configs.changeBackgroundColor()
+				Configs.colorInput.value = ""
 			}
 		} )
 		ClassroomLinks.prepareListener()
@@ -130,3 +154,9 @@ const App = {
 }
 
 App.init()
+
+function clearLinks() {
+	localStorage.setItem("startpage:sidebarlinks", JSON.stringify([]))
+	SideBarLinks.all = []
+	App.reload()
+}
