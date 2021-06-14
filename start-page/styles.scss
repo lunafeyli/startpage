@@ -1,0 +1,229 @@
+/**/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/**/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+    font-weight: 300;
+}
+
+body,
+html {
+	height: 100vh;
+    width: 100vw;
+}
+
+body {
+    overflow: hidden;
+    background-color: #151019;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#bar {
+    height: 70%;
+    width: 70vw;
+    outline: none;
+    border: none;
+    font-size: 10rem;
+    text-align: center;
+    background-color: transparent;
+    color: #fff;
+}
+
+.classroom-links {
+    position: absolute;
+    right: 25px;
+	
+	li {
+	    display: flex;
+	    align-items: center;
+	    justify-content: flex-end;
+	    cursor: pointer;
+	    margin: 10px 0;
+
+		a { text-decoration: none; }
+
+		.title{
+		    color: #ffffff78;
+		    padding-right: 10px;
+		    font-weight: lighter;
+		    font-family: system-ui;
+		    letter-spacing: 2px;
+		}
+
+		.icon{
+		    height: 38px;
+		    width: 38px;
+		    border-radius: 50%;
+		    background-color: #151019ff;
+		    background-image: url(./assets/book.svg);
+		    background-repeat: no-repeat;
+		    background-position: center;
+    	    cursor: pointer;
+		}
+
+		&:hover .icon { background-image: url(./assets/book-open.svg); }
+	}
+}
+
+
+.side-links {
+    position: absolute;
+    left: 25px;
+
+	li {
+	    display: flex;
+	    align-items: center;
+	    justify-content: flex-start;
+	    cursor: pointer;
+	    margin: 10px 0;
+
+		a { text-decoration: none; }
+
+		.title{
+		    color: #ffffff78;
+		    padding-left: 10px;
+		    font-weight: lighter;
+		    font-family: system-ui;
+		    letter-spacing: 2px;
+		}
+
+		.icon{
+		    height: 38px;
+		    width: 38px;
+		    border-radius: 50%;
+		    background-color: #151019ff;
+		    background-image: url(./assets/link.svg);
+		    background-repeat: no-repeat;
+		    background-position: center;
+    	    cursor: pointer;
+		}
+
+		&:hover .icon { background-image: url(./assets/external-link.svg); }
+
+		.delete-button {
+		    height: 15px;
+		    width: 15px;
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    background: #ffffff00;
+		    border: none;
+		    outline: none;
+		    color: white;
+		    display: none;
+		    cursor: pointer;
+		}
+
+		&:hover .delete-button {
+		    display: flex;
+		}
+	}
+}
+
+.new-link-area {
+	.add-link {
+	    position: absolute;
+	    display: none;
+	    cursor: default;
+	    left: 80px;
+	    bottom: 25px;
+
+		&.on {
+		    display: flex;
+		    flex-direction: column;
+		}
+
+		input,
+		button {
+		    background-color: transparent;
+		    border-radius: 50px;
+		    border: 2px solid #ffffff3b;
+		    color: #ffffff78;
+		    outline: none;
+		    height: 32px;
+		    padding: 0 15px;
+		    margin: 5px 0;
+		}
+
+		button:hover {
+		    background-color: #ffffff11;
+		    color: #fff;
+		}
+
+		button:active {
+		    background-color: #ffffff3b;
+		    color: #fff;
+		}
+
+	}
+
+	.add-link-button {
+	    outline: none;
+	    position: absolute;
+	    left: 25px;
+	    bottom: 25px;
+	    height: 38px;
+	    width: 38px;
+	    border-radius: 50%;
+	    background-color: #151019ff;
+	    background-image: url(./assets/plus.svg);
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    cursor: pointer;
+	}
+
+}
+
+.modal-overlay {
+	&.on {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    height: 100vh;
+	    width: 100vw;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	}
+
+	.modal {
+	    display: none;
+
+		&.on {
+		    background-color: #110d15;
+		    padding: 25px;
+		    display: block;
+		    z-index: 1000;
+		}
+	}
+}
+
+.open-modal-button {
+    outline: none;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    background-color: #151019ff;
+    background-image: url(./assets/settings.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    z-index: 1001;
+}

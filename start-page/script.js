@@ -1,4 +1,3 @@
-
 const Modal = {
 	toggle() {
 		let modalOverlay = document.querySelector(".modal-overlay")
@@ -22,9 +21,13 @@ const SearchBar = {
 	url: "duckduckgo.com/?q=&t=h_&ia=web",
 	searchBar: document.querySelector("#bar"),
 
-	search() {
-		let searchTearm = SearchBar.searchBar.value
-		Utils.goToLink(`https://www.duckduckgo.com/?q=${searchTearm}&t=h_&ia=web`)
+	search(searchTearm) {
+		let itsUrl = searchTearm.includes("https://")
+		if (searchTearm && !itsUrl) { 
+			Utils.goToLink(`https://www.duckduckgo.com/?q=${searchTearm}&t=h_&ia=web`)
+		} else {
+			Utils.goToLink(`${searchTearm}`)
+		}
 	}
 }
 
@@ -43,15 +46,7 @@ const ClassroomLinks = {
 		espanhol:"https://classroom.google.com/u/1/c/MjY1MDk0MjQ2MjU4"
 	},
 
-	prepareListener() {
-		/*ClassroomLinks.linkButtons.forEach( e => {
-			e.addEventListener("click", element => {
-				let clicked = element.path[1]
-				let materia = clicked.id
-				let url = ClassroomLinks.urls[materia]
-				Utils.goToLink(url)
-			} )
-		} )*/
+	updateHref() {
 		ClassroomLinks.linkButtons.forEach( e => { e.href = ClassroomLinks.urls[e.id] } )
 	}
 }
@@ -109,10 +104,10 @@ const DOM = {
 	},
 	innerHtmlLink(element) {
 		let html = `
-		<button class="delete-button" onclick="SideBarLinks.removeLink(${name})">X</button>
+		<button class="delete-button" onclick="SideBarLinks.removeLink(${name})"><i data-feather="x"></i></button>
 		<span class="icon"></span>
 		<a class="link" href="${element.url}">
-			<span class="title">${element.name}</span>
+			<span class="title">${element.name}
 		</a>
 		`
 
@@ -126,6 +121,11 @@ const DOM = {
 const Utils = {
 	goToLink(link) {
 		window.location.href = link;
+	},
+	clearLinks() {
+		localStorage.setItem("startpage:sidebarlinks", JSON.stringify([]))
+		SideBarLinks.all = []
+		App.reload()
 	}
 }
 
@@ -133,19 +133,8 @@ const App = {
 	init() {
 		DOM.clearLinksContainer()
 		SideBarLinks.all.forEach( element => DOM.addLinkElement(element))
-		SearchBar.searchBar.addEventListener( "keydown", element => {
-			if (element.key == "Enter") {
-				SearchBar.search()
-			}
-		} )
-		Configs.colorInput.addEventListener( "keydown", element => {
-			if (element.key == "Enter" && Configs.colorInput.value != "" && Configs.colorInput.value.includes('#')) {
-				Modal.toggle()
-				Configs.changeBackgroundColor()
-				Configs.colorInput.value = ""
-			}
-		} )
-		ClassroomLinks.prepareListener()
+		SearchBar.searchBar.addEventListener( "keydown", element => {if (element.key == "Enter") SearchBar.search(SearchBar.searchBar.value) })
+		ClassroomLinks.updateHref()
 		Storage.set(SideBarLinks.all)
 	},
 	reload() {
@@ -154,9 +143,3 @@ const App = {
 }
 
 App.init()
-
-function clearLinks() {
-	localStorage.setItem("startpage:sidebarlinks", JSON.stringify([]))
-	SideBarLinks.all = []
-	App.reload()
-}
