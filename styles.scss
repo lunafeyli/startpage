@@ -87,6 +87,7 @@ main {
 	    justify-content: flex-start;
 	    cursor: pointer;
 	    margin: 10px 0;
+	    position: relative;
 
 		a { text-decoration: none; }
 
@@ -115,9 +116,8 @@ main {
 		    height: 15px;
 		    width: 15px;
 		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    display: flex;
+		    top: -5px;
+		    left: -5px;
 		    align-items: center;
 		    justify-content: center;
 		    background: #ffffff00;
@@ -126,6 +126,11 @@ main {
 		    color: white;
 		    display: none;
 		    cursor: pointer;
+
+		    img {
+		    	height: 16px;
+		    	width: 16px;
+		    }
 		}
 
 		&:hover .delete-button {

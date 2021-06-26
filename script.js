@@ -1,19 +1,9 @@
-const Modal = {
-	toggle() {
-		let modalOverlay = document.querySelector(".modal-overlay")
-		let modal = document.querySelector(".modal")
-
-		modalOverlay.classList.toggle("on")
-		modal.classList.toggle("on")
-	}
-}
-
 const Storage = {
 	get() {
 		return JSON.parse(localStorage.getItem("startpage:sidebarlinks")) || []
 	},
-	set(links) {
-		localStorage.setItem("startpage:sidebarlinks", JSON.stringify(links))
+	set() {
+		localStorage.setItem("startpage:sidebarlinks", JSON.stringify(SideBarLinks.all))
 	}
 }
 
@@ -60,12 +50,7 @@ const SideBarLinks = {
 		let name = SideBarLinks.addLinkInputName.value
 		let url = SideBarLinks.addLinkInputUrl.value
 
-		SideBarLinks.all.push(
-			{
-				name,
-				url
-			}
-		)
+		SideBarLinks.all.push({name,url})
 
 		App.reload()
 	},
@@ -104,7 +89,7 @@ const DOM = {
 	},
 	innerHtmlLink(element) {
 		let html = `
-		<button class="delete-button" onclick="SideBarLinks.removeLink(${name})"><i data-feather="x"></i></button>
+		<button class="delete-button" onclick="SideBarLinks.removeLink(${name})"><img src="./assets/x.svg"></button>
 		<span class="icon"></span>
 		<a class="link" href="${element.url}">
 			<span class="title">${element.name}
