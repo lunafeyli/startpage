@@ -5,16 +5,23 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Start Page</title>
-		<link rel="stylesheet" href="styles.css" />
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.svg">
+		<link rel="stylesheet" href="style.css" />
+		<link rel="shortcut icon" type="image/x-icon" href="./assets/favicon.png">
 		<script src="https://unpkg.com/feather-icons"></script>
 	</head>
 	<body>
 		<main>
 			<ul class="side-links">
 			</ul>
-			<div class="search-bar">
-				<input type="text" name="search-bar" id="bar" autocomplete="off" autofocus="on">
+			<div class="search">
+				<input type="text" name="search-bar" id="bar" autocomplete="off" autofocus="on" placeholder="Buscar">
+				<div class="metodes">
+					<div>
+						<span class="metode" data-metode-name="youtube">YouTube</span>
+						<span class="metode active" data-metode-name="duck">DuckDuckGo</span>
+						<span class="metode" data-metode-name="google">Google</span>
+					</div>
+				</div>
 			</div>
 			<ul class="classroom-links">
 				<li class="classroom-link">
