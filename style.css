@@ -89,66 +89,74 @@ main {
     .classroom-links li:hover .icon {
       background-image: url(./assets/book-open.svg); }
 
-.side-links {
+.side-links#left {
   position: absolute;
   left: 25px; }
-  .side-links li {
-    display: flex;
+.side-links#right {
+  position: absolute;
+  right: 25px; }
+  .side-links#right li {
+    flex-direction: row-reverse; }
+    .side-links#right li .delete-button {
+      right: -5px;
+      left: inherit; }
+.side-links li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  margin: 10px 0;
+  position: relative; }
+  .side-links li a {
+    text-decoration: none; }
+  .side-links li .title {
+    color: #ffffff78;
+    padding-left: 10px;
+    font-weight: lighter;
+    font-family: system-ui;
+    letter-spacing: 2px; }
+  .side-links li .icon {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    background-color: #151019ff;
+    background-image: url(./assets/link.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer; }
+  .side-links li:hover .icon {
+    background-image: url(./assets/external-link.svg); }
+  .side-links li .delete-button {
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: -5px;
+    left: -5px;
     align-items: center;
-    justify-content: flex-start;
-    cursor: pointer;
-    margin: 10px 0;
-    position: relative; }
-    .side-links li a {
-      text-decoration: none; }
-    .side-links li .title {
-      color: #ffffff78;
-      padding-left: 10px;
-      font-weight: lighter;
-      font-family: system-ui;
-      letter-spacing: 2px; }
-    .side-links li .icon {
-      height: 38px;
-      width: 38px;
-      border-radius: 50%;
-      background-color: #151019ff;
-      background-image: url(./assets/link.svg);
-      background-repeat: no-repeat;
-      background-position: center;
-      cursor: pointer; }
-    .side-links li:hover .icon {
-      background-image: url(./assets/external-link.svg); }
-    .side-links li .delete-button {
-      height: 15px;
-      width: 15px;
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff00;
-      border: none;
-      outline: none;
-      color: white;
-      display: none;
-      cursor: pointer; }
-      .side-links li .delete-button img {
-        height: 16px;
-        width: 16px; }
-    .side-links li:hover .delete-button {
-      display: flex; }
+    justify-content: center;
+    background: #ffffff00;
+    border: none;
+    outline: none;
+    color: white;
+    display: none;
+    cursor: pointer; }
+    .side-links li .delete-button img {
+      height: 16px;
+      width: 16px; }
+  .side-links li:hover .delete-button {
+    display: flex; }
 
-.new-link-area .add-link {
+.new-link .add-link {
   position: absolute;
   display: none;
   cursor: default;
   left: 80px;
   bottom: 25px; }
-  .new-link-area .add-link.on {
+  .new-link .add-link.on {
     display: flex;
     flex-direction: column; }
-  .new-link-area .add-link input,
-  .new-link-area .add-link button {
+  .new-link .add-link input,
+  .new-link .add-link button {
     background-color: transparent;
     border-radius: 50px;
     border: 2px solid #ffffff3b;
@@ -157,13 +165,40 @@ main {
     height: 32px;
     padding: 0 15px;
     margin: 5px 0; }
-  .new-link-area .add-link button:hover {
+  .new-link .add-link button:hover {
     background-color: #ffffff11;
     color: #fff; }
-  .new-link-area .add-link button:active {
+  .new-link .add-link button:active {
     background-color: #ffffff3b;
     color: #fff; }
-.new-link-area .add-link-button {
+  .new-link .add-link .side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0; }
+    .new-link .add-link .side input {
+      position: absolute;
+      opacity: 0;
+      visibility: hidden; }
+      .new-link .add-link .side input:hover + label {
+        background-color: #ffffff11;
+        color: #fff; }
+      .new-link .add-link .side input:checked + label {
+        background-color: #ffffff3b;
+        color: #fff; }
+    .new-link .add-link .side label {
+      display: flex;
+      width: 35%;
+      background-color: transparent;
+      border-radius: 25px;
+      border: 2px solid #ffffff3b;
+      color: #ffffff78;
+      outline: none;
+      padding: 1px 8px;
+      align-content: center;
+      justify-content: center;
+      margin: 0 4px; }
+.new-link .add-link-button {
   outline: none;
   position: absolute;
   left: 25px;
@@ -175,7 +210,12 @@ main {
   background-image: url(./assets/plus.svg);
   background-repeat: no-repeat;
   background-position: center;
-  cursor: pointer; }
+  cursor: pointer;
+  border: 2px groove #ffffff3b; }
+  .new-link .add-link-button:hover {
+    border-color: #ffffff78; }
+  .new-link .add-link-button:active {
+    background-color: #ffffff11; }
 
 .modal-overlay.on {
   position: absolute;

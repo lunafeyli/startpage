@@ -1,7 +1,5 @@
 const Storage = {
-	get(toGet) {
-		return localStorage.getItem(`startpage:${toGet}`) || "";
-	},
+	get: toGet => localStorage.getItem(`startpage:${toGet}`) || "",
 	set() {
 		localStorage.setItem(
 			"startpage:sidebarlinks",
@@ -10,6 +8,32 @@ const Storage = {
 		localStorage.setItem("startpage:searchMetode", SearchBar.actualMetode);
 	},
 };
+
+const Form = {
+	submit(event) {
+		event.preventDefault();
+
+		let form = event.target;
+
+		let name = form[0].value,
+			url = form[1].value,
+			side = form.elements.side.value
+
+		SideBarLinks.all.push({ name, url, side })
+
+		Form.clearFilds(form)
+
+		SideBarLinks.onAddArea()
+
+		App.reload();
+	},
+
+	clearFilds(form) {
+		form[0].value = ""
+		form[1].value = ""
+		form.elements.side.forEach( e => e.checked = false )
+	}
+}
 
 const SearchBar = {
 	searchBar: document.querySelector("#bar"),
@@ -59,7 +83,7 @@ const SearchBar = {
 	},
 };
 
-const ClassroomLinks = {
+/*const ClassroomLinks = {
 	linkButtons: document.querySelectorAll(".classroom-link a"),
 
 	urls: {
@@ -79,25 +103,15 @@ const ClassroomLinks = {
 			e.href = ClassroomLinks.urls[e.id];
 		});
 	},
-};
+};*/
 
 const SideBarLinks = {
 	all: JSON.parse(Storage.get("sidebarlinks")) || [],
 	addLinkInputName: document.querySelector(".add-link-input#name"),
 	addLinkInputUrl: document.querySelector(".add-link-input#url"),
 
-	addLink() {
-		let name = SideBarLinks.addLinkInputName.value;
-		let url = SideBarLinks.addLinkInputUrl.value;
-
-		SideBarLinks.all.push({ name, url });
-
-		App.reload();
-	},
 	removeLink(name) {
-		let toRemove = SideBarLinks.all.filter(
-			(element) => element.name == name
-		)[0];
+		let toRemove = SideBarLinks.all.filter((element) => element.name == name)[0];
 		toRemove = SideBarLinks.all.indexOf(toRemove);
 
 		SideBarLinks.all.splice(toRemove, 1);
@@ -120,18 +134,23 @@ const Configs = {
 };
 
 const DOM = {
-	linksContainer: document.querySelector(".side-links"),
-	addLinkElement(element) {
+	linksContainerLeft: document.querySelector(".side-links#left"),
+	linksContainerRight: document.querySelector(".side-links#right"),
+
+	addLinkElement(element, side) {
 		let li = document.createElement("li");
 		li.classList.add("link");
 		li.id = element.name;
 		li.innerHTML = DOM.innerHtmlLink(element);
 
-		DOM.linksContainer.appendChild(li);
+		let linksContainer = side == "left" ? DOM.linksContainerLeft : DOM.linksContainerRight
+
+		linksContainer.appendChild(li);
 	},
+
 	innerHtmlLink(element) {
 		let html = `
-		<button class="delete-button" onclick="SideBarLinks.removeLink(${name})"><img src="./assets/x.svg"></button>
+		<button class="delete-button" onclick="SideBarLinks.removeLink('${element.name}')"><img src="./assets/x.svg"></button>
 		<span class="icon"></span>
 		<a class="link" href="${element.url}">
 			<span class="title">${element.name}
@@ -140,20 +159,23 @@ const DOM = {
 
 		return html;
 	},
-	clearLinksContainer() {
-		DOM.linksContainer.innerHTML = "";
+
+	filterLinks() {
+		let leftLinks = SideBarLinks.all.filter( e => e.side == "left" ),
+			rightLinks = SideBarLinks.all.filter( e => e.side == "right" )
+
+		leftLinks.forEach((element) => DOM.addLinkElement(element, "left"));
+		rightLinks.forEach((element) => DOM.addLinkElement(element, "right"));
 	},
+
+	clearLinksContainer() {
+		DOM.linksContainerLeft.innerHTML = "";
+		DOM.linksContainerRight.innerHTML = "";
+	},
+
 	DOMListener() {
 		SearchBar.metodes.addEventListener("click", (element) =>
 			SearchBar.changeMetode(element.target)
-		);
-
-		SearchBar.metodes.addEventListener("mouseenter", (element) =>
-			element.target.classList.add("hover")
-		);
-
-		SearchBar.metodes.addEventListener("mouseleave", (element) =>
-			element.target.classList.remove("hover")
 		);
 	},
 
@@ -184,8 +206,8 @@ const App = {
 		DOM.clearLinksContainer();
 		DOM.DOMListener();
 		App.keyboardListener();
-		SideBarLinks.all.forEach((element) => DOM.addLinkElement(element));
-		ClassroomLinks.updateHref();
+		DOM.filterLinks();
+		//ClassroomLinks.updateHref();
 		Storage.set(SideBarLinks.all);
 		DOM.activateMetodeElement();
 	},

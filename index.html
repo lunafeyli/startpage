@@ -11,8 +11,7 @@
 	</head>
 	<body>
 		<main>
-			<ul class="side-links">
-			</ul>
+			<ul class="side-links" id="left"></ul>
 			<div class="search">
 				<input type="text" name="search-bar" id="bar" autocomplete="off" autofocus="on" placeholder="Buscar">
 				<div class="metodes">
@@ -23,7 +22,7 @@
 					</div>
 				</div>
 			</div>
-			<ul class="classroom-links">
+			<!-- <ul class="classroom-links">
 				<li class="classroom-link">
 					<a id="portugues">
 						<span class="title">Portugues</span>
@@ -78,15 +77,23 @@
 					</a>
 					<span class="icon"></span>
 				</li>
-			</ul>
-			<div class="new-link-area">
-				<button class="add-link-button" onclick="SideBarLinks.onAddArea()">
-				</button>
-				<div class="add-link">
+			</ul> -->
+
+			<ul class="side-links" id="right"></ul>
+
+			<div class="new-link">
+				<button class="add-link-button" onclick="SideBarLinks.onAddArea()"></button>
+				<form onsubmit="Form.submit(event)" class="add-link">
 					<input type="text" name="" class="add-link-input" id="name" placeholder="Nome">
 					<input type="text" name="" class="add-link-input" id="url" value="http://" placeholder="Link">
-					<button class="add-link-input" onclick="SideBarLinks.addLink()">Adicionar</button>
-				</div>
+					<div class="side">
+						<input type="radio" id="left-radio" name="side" value="left">
+						<label for="left-radio">Left</label>
+						<input type="radio" name="side" id="right-radio" value="right">
+						<label for="right-radio">Right</label>
+					</div>
+					<button class="add-link-input">Adicionar</button>
+				</form>
 			</div>
 			<button class="open-modal-button" onclick="Modal.toggle()" disabled="true"></button>
 		</main>

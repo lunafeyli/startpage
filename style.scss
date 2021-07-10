@@ -119,8 +119,22 @@ main {
 }
 
 .side-links {
-	position: absolute;
-	left: 25px;
+
+	&#left {
+		position: absolute;
+		left: 25px;
+	}
+
+	&#right {
+		position: absolute;
+		right: 25px;
+
+		li {
+			flex-direction: row-reverse;
+
+			.delete-button { right: -5px; left: inherit; }
+		}
+	}
 
 	li {
 		display: flex;
@@ -184,7 +198,7 @@ main {
 	}
 }
 
-.new-link-area {
+.new-link {
 	.add-link {
 		position: absolute;
 		display: none;
@@ -218,6 +232,43 @@ main {
 			background-color: #ffffff3b;
 			color: #fff;
 		}
+
+		.side {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 8px 0;
+
+			input {
+				position: absolute;
+			    opacity: 0;
+			    visibility: hidden;
+
+			    &:hover + label {
+			    	background-color: #ffffff11;
+			    	color: #fff;
+			    }
+
+			    &:checked + label {
+			    	background-color: #ffffff3b;
+			    	color: #fff;
+			    }
+			}
+
+			label {
+				display: flex;
+			    width: 35%;
+			    background-color: transparent;
+			    border-radius: 25px;
+			    border: 2px solid #ffffff3b;
+			    color: #ffffff78;
+			    outline: none;
+			    padding: 1px 8px;
+			    align-content: center;
+			    justify-content: center;
+			    margin: 0 4px;
+			}
+		}
 	}
 
 	.add-link-button {
@@ -233,6 +284,15 @@ main {
 		background-repeat: no-repeat;
 		background-position: center;
 		cursor: pointer;
+		border: 2px groove #ffffff3b;
+
+		&:hover {
+			border-color: #ffffff78;
+		}
+
+		&:active {
+			background-color: #ffffff11;
+		}
 	}
 }
 
